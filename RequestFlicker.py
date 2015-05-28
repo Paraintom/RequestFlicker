@@ -67,7 +67,7 @@ class RequestFlicker(WebSocket):
 						self.sendMessage('client disconnected')
 				else:
 					self.sendMessage('Invalid answer, should be a json string with id and answer field.'
-					'example {\"id\":\"102\",\"answer\":\"pong\"}')
+					'example {\"id\":102,\"answer\":\"pong\"}')
 		except Exception,e:
 			print 'Exception while handling message'
 			print 'Message: {} '.format(msg)
@@ -98,7 +98,7 @@ class RequestFlicker(WebSocket):
 def getAnwser(string):
 	if is_json(string):
 		data = json.loads(string)
-		if (('id' not in data) or isinstance(data['id'], (int, long)) or ('answer' not in data) or (IsNull(data['answer']))):
+		if (('id' not in data) or not isinstance(data['id'], (int, long)) or ('answer' not in data) or (IsNull(data['answer']))):
 			return None		
 		else:
 			return data
