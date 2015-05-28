@@ -89,7 +89,7 @@ class RequestFlicker(WebSocket):
 				del RequestFlicker.pendingRequest[self.requestId]
 				return
 				
-			print 'NotSet {} disconnected'.format(msg)
+			print 'NotSet {} disconnected'.format()
 		except Exception,e:
 			print 'Exception while handling close'
 			print str(e)
