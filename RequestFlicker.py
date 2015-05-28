@@ -84,12 +84,15 @@ class RequestFlicker(WebSocket):
 				del RequestFlicker.servicesRegistered[self.serviceName]
 				return
 				
-			if self.role == Role.REQUESTER:			
-				print 'Requester {} disconnected'.format(self.requestId)
-				del RequestFlicker.pendingRequest[self.requestId]
+			if self.role == Role.REQUESTER:	
+				if hasattr(self, 'requestId'):
+					print 'Requester {} disconnected'.format(self.requestId)
+					del RequestFlicker.pendingRequest[self.requestId]
+				else :				
+					print 'Requester disconnected'
 				return
 				
-			print 'NotSet {} disconnected'.format()
+			print 'NotSet disconnected'
 		except Exception,e:
 			print 'Exception while handling close'
 			print str(e)
@@ -142,5 +145,5 @@ class Role:
     REQUESTER = 1
     SERVICE = 2
 	
-server = SimpleWebSocketServer('', 8099, RequestFlicker)
+server = SimpleWebSocketServer('', 8181, RequestFlicker)
 server.serveforever()
