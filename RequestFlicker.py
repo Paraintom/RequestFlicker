@@ -62,7 +62,7 @@ class RequestFlicker(WebSocket):
 				if answer is not None:
 					id = int(answer['id'])
 					if id in RequestFlicker.pendingRequest :
-						RequestFlicker.pendingRequest[id].sendMessage(str(answer['answer']))
+						RequestFlicker.pendingRequest[id].sendMessage(json.dumps(answer['answer']))
 					else:
 						self.sendMessage('client disconnected')
 				else:
