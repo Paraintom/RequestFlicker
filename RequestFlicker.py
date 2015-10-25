@@ -22,6 +22,10 @@ class RequestFlicker(WebSocket):
 			
 			msg = str(self.data)
 			
+			if msg == "ping":
+				self.sendMessage("pong")
+				return
+			
 			# CASE 1 : REQUESTER
 			if self.role == Role.REQUESTER:
 				#We only listen to one request at a time
